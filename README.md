@@ -54,3 +54,12 @@ Alternatively, download the DMG file and launch the app directly.
 	•	macOS 13.5 or later
 
 
+# Screenshots:
+
+
+![wechat_2025-05-01_004359_915](https://github.com/user-attachments/assets/ccc2ec5b-103a-47a0-992b-dbe4e9046a25)
+
+![wechat_2025-05-01_004420_346](https://github.com/user-attachments/assets/fca7642a-eef3-4156-a003-758ab3d32090)
+
+![wechat_2025-05-01_004547_684](https://github.com/user-attachments/assets/4c1a6093-5336-487e-b7b4-aaf87f9ec823)
+
