@@ -54,7 +54,7 @@ Alternatively, download the DMG file and launch the app directly.
 	•	macOS 13.5 or later
 
 
-# Special thanks to Gemini 2.5 Pro, GPT-3.5, and GPT-4 Mini High for their valuable support.
+#### Special thanks to Gemini 2.5 Pro, GPT-3.5, and GPT-4 Mini High for their valuable support.
 
 
 # Screenshots:
