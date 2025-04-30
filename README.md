@@ -1,8 +1,8 @@
 # Overview
+  
+  MultiPing is a lightweight, user-friendly macOS application built with SwiftUI, designed to ping multiple IP addresses concurrently. Inspired by tools like PingInfoView on Windows, MultiPing provides real-time insights into host reachability using ICMP echo requests, while offering extensive customization options.
 
-MultiPing is a lightweight, user-friendly macOS application built with SwiftUI, designed to ping multiple IP addresses concurrently. Inspired by tools like PingInfoView on Windows, MultiPing provides real-time insights into host reachability using ICMP echo requests, while offering extensive customization options.
-
-Whether you’re a network engineer, IT administrator, or a curious user, MultiPing makes it easy to monitor the connectivity and latency of multiple hosts simultaneously on macOS.
+  Whether you’re a network engineer, IT administrator, or a curious user, MultiPing makes it easy to monitor the connectivity and latency of multiple hosts simultaneously on macOS.
 
 
 
