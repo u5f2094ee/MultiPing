@@ -1,41 +1,56 @@
 # Overview
 
-MultiPing is a lightweight and user-friendly macOS application built using SwiftUI that allows users to ping multiple IP addresses concurrently. Inspired by tools like PingInfoView on Windows, MultiPing was designed to provide real-time visibility into host reachability using ICMP echo requests with extended customization options.
+MultiPing is a lightweight, user-friendly macOS application built with SwiftUI, designed to ping multiple IP addresses concurrently. Inspired by tools like PingInfoView on Windows, MultiPing provides real-time insights into host reachability using ICMP echo requests, while offering extensive customization options.
 
-This project is ideal for network engineers, IT admins, or curious users who want to monitor connectivity and latency of multiple hosts simultaneously on macOS.
+Whether you’re a network engineer, IT administrator, or a curious user, MultiPing makes it easy to monitor the connectivity and latency of multiple hosts simultaneously on macOS.
+
+
 
 # Features
 
-Input multiple IP addresses in a text box
-Customize:
+##### Input & Configuration
+	•	Enter multiple IP addresses via a simple text input
+	•	Customize:
 	•	Ping timeout (ms)
 	•	Ping interval (s)
 	•	Packet size (bytes)
 
-Visualize:
-	•	Live ping status with green/red dot indicators
-	•	Ping response time in ms or timeout
-	•	Success/failure count per IP
-	•	Failure rate (%) per IP, rounded to two decimals
+##### Visualization
+	•	Real-time status indicators (green/red dots)
+	•	Live display of response times or timeouts
+	•	Success/failure counters per IP
+	•	Failure rate (%) per IP, rounded to two decimal places
 
-Control:
-	•	Start, Pause, and Stop pinging
-	•	Ping runs concurrently per host
-	•	UI stays responsive even under high load
+##### Controls
+	•	Start, Pause, Stop, and Clear ping results
+	•	Concurrent pings for each host
+	•	UI remains responsive, even under heavy load
 
-Clean two-window layout:
+##### Sorting & Zoom
+	•	Sort by failure counts and other result columns
+	•	Zoom in/out for better visibility with large IP lists
+
+##### Two-Window Interface
 	•	Input window for configuration
-	•	Result window for real-time feedback
+	•	Results window for live feedback and monitoring
+
+
 
 # How to Run
 
-	1.	Open the project in Xcode (v14 or newer recommended)
-	2.	Build and run the app on macOS (ARM or Intel)
-	3.	Enter IP addresses (separated by comma or newline)
-	4.	Set timeout, interval, and size as needed
-	5.	Press Okay → App opens results window
-	6.	Press Start Ping to begin monitoring
+	1.	Open the project in Xcode 14 or later
+	2.	Build and run the app on macOS (Apple Silicon or Intel)
+	3.	Enter IP addresses (comma- or newline-separated)
+	4.	Configure timeout, interval, and packet size as desired
+	5.	Click Okay to open the results window
+	6.	Click Start Ping to begin monitoring
+
+Alternatively, download the DMG file and launch the app directly.
 
 
 
-By the way it's still under developing now.
+# Requirements
+
+	•	macOS 13.5 or later
+
+
