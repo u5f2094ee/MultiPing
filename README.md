@@ -46,6 +46,7 @@
 	6.	Click Start Ping to begin monitoring
 
 Alternatively, download the DMG file and launch the app directly.
+if warning alarm pops, go to System settings - Privacy & Security - Allow applications from App Store & known Developers + ignore the warnings and click "OPEN ANYWAY".
 
 
 
