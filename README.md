@@ -49,7 +49,9 @@ Whether you're a network engineer, IT administrator, or tech enthusiast, MultiPi
 5. Click **Start Ping** to monitor IP reachability  
 
 Alternatively, download the DMG and launch the app directly.  
-If macOS blocks the app, go to:  
+
+
+### If macOS blocks the app, go to:  ###
 **System Settings → Privacy & Security → Allow Apps from Identified Developers**,  
 then click **“Open Anyway”**.
 
