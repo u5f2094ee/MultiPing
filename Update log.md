@@ -10,6 +10,7 @@
 9. Both views feature a status bar showing overall success/failure statistics.
 10. Both views support sorting by various criteria.
 11. Both views support full control of test operations including Start/Stop (Clean) and Pause/Resume.
+
 12. In Grid View, each card displays:
 	- The target IP address
 	- Success/failure statistics
