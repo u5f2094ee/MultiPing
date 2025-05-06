@@ -1,7 +1,9 @@
 
+# Screenshot
 
-![Multiping for macOS 1 1 Screenshot](https://github.com/user-attachments/assets/f5d821d7-6c5e-4883-af97-584ce9031ebd)
+![Multiping for macOS 1 1 Screenshot](https://github.com/user-attachments/assets/a273722a-d233-4276-9d24-b66291cd2250)
 
+---
 
 # Overview
 
