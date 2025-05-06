@@ -10,7 +10,6 @@
 9. Both views feature a status bar showing overall success/failure statistics.
 10. Both views support sorting by various criteria.
 11. Both views support full control of test operations including Start/Stop (Clean) and Pause/Resume.
-
 12. In Grid View, each card displays:
 	- The target IP address
 	- Success/failure statistics
@@ -29,8 +28,7 @@ Chinese:
 9. Grid与List模式均状态栏实时显示整体成功/失败统计信息。
 10. Grid与List模式均支持按多种条件进行排序。
 11. Grid与List模式均支持测试操作的完整控制，包括: 启动/停止（清空）、 暂停/恢复。
-
-12.Grid 模式中，每张卡片显示：
+12. Grid 模式中，每张卡片显示：
 	- 目标IP地址
 	- 成功/失败统计
 	- 当前测试状态
