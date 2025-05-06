@@ -1,3 +1,6 @@
+![Uploading Multiping for macOS 1.1 Screenshot.JPEG…]()
+
+
 # Overview
 
 **MultiPing for macOS** is a lightweight, user-friendly network monitoring tool built with SwiftUI. Inspired by utilities like PingInfoView on Windows, MultiPing enables you to ping multiple IP addresses concurrently and provides real-time visibility into host reachability via ICMP echo requests.
