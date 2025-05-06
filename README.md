@@ -58,7 +58,3 @@ then click **“Open Anyway”**.
 
 Special thanks to **Gemini 2.5 Pro**, **GPT-o3**, and **GPT-o4-mini-high** for their invaluable support and contributions to this project.
 
----
-
-# Screenshots
-
