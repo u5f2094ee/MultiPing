@@ -7,16 +7,15 @@ struct MultiPingApp: App {
 
     var body: some Scene {
         // Use Window instead of WindowGroup for styling
-        Window("IP Collector", id: "ip-input") { // Title is set here
+        // Window title changed from "IP Collector" to "Targets Collector"
+        Window("Targets Collector", id: "ip-input") { // Title updated here
             // Initialize IPInputView with manager
             IPInputView(manager: manager)
         }
-        // Apply window style modifiers
-        // REMOVED: .windowStyle(.hiddenTitleBar) // This was hiding the title text
+        // Apply window style modifiers (Unchanged from v1.1)
         .windowStyle(.hiddenTitleBar)
-        .windowToolbarStyle(.unified)   // Integrates toolbar area with title bar space, allowing title to show
+        .windowToolbarStyle(.unified)
         // Optional: Set default size if needed (IPInputView already has .frame)
         // .defaultSize(width: 500, height: 380)
     }
 }
-

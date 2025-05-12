@@ -1,10 +1,19 @@
 import Foundation
 import Combine // Needed for ObservableObject
 
+// Define an enum for target types
+enum TargetType: String, Codable, CaseIterable { // Added CaseIterable for potential future use
+    case ipv4 = "IPv4"
+    case ipv6 = "IPv6"
+    case domain = "Domain"
+    case unknown = "Unknown" // For fallback or initial state
+}
+
 // Converted to a class conforming to ObservableObject
 class PingResult: ObservableObject, Identifiable, Equatable { // Added Equatable
     let id = UUID() // Stays the same for Identifiable & Equatable
-    let ip: String  // IP doesn't change
+    let targetValue: String  // Renamed from 'ip' to be more generic
+    let targetType: TargetType // New property to store the type
 
     // Properties that change are marked @Published
     @Published var responseTime: String
@@ -14,8 +23,9 @@ class PingResult: ObservableObject, Identifiable, Equatable { // Added Equatable
     @Published var isSuccessful: Bool
 
     // Initializer for the class
-    init(ip: String, responseTime: String, successCount: Int, failureCount: Int, failureRate: Double, isSuccessful: Bool) {
-        self.ip = ip
+    init(targetValue: String, targetType: TargetType, responseTime: String, successCount: Int, failureCount: Int, failureRate: Double, isSuccessful: Bool) {
+        self.targetValue = targetValue
+        self.targetType = targetType // Initialize the new property
         self.responseTime = responseTime
         self.successCount = successCount
         self.failureCount = failureCount
@@ -37,6 +47,11 @@ class PingResult: ObservableObject, Identifiable, Equatable { // Added Equatable
         self.failureCount = 0
         self.failureRate = 0.0
         self.isSuccessful = false
+    }
+
+    // Convenience accessor for display name, which is always the targetValue
+    var displayName: String {
+        return targetValue
     }
 }
 
