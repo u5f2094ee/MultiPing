@@ -1,3 +1,21 @@
+## 2025.05.13 Version 1.2(20250513)
+1. Added support for IPv6 testing functionality.
+2. Added support for domain name testing functionality.
+3. The test target input interface now supports mixed input of IPv4, IPv6, and domain names as test targets.
+4. Bug fix: Resolved an issue where quickly clicking the "Pause" and "Resume" buttons caused the ping test to incorrectly enter the "Complete" state and become unresponsive.
+5. Optimized testing logic and process.
+
+
+Chinese:
+1. 新增支持IPv6测试功能。
+2. 新增支持域名测试功能。
+3. 测试目标输入界面现支持用户混合输入IPv4、IPv6和Domain name作为测试目标。
+4. 修复BUG：解决了快速点击“暂停”和“恢复”按钮时，ping测试状态错误地进入“Complete”并无法继续的问题。
+5. 优化测试逻辑和流程。
+
+
+-----
+
 ## 2025.05.06 Version 1.1(20250506)
 1. Renamed the application to “MultiPing for macOS”.
 2. Implemented a cap on concurrent ping tasks and introduced randomized interval jitter to mitigate false failure results when testing a large number of IP addresses.
@@ -28,7 +46,7 @@ Chinese:
 9. Grid与List模式均状态栏实时显示整体成功/失败统计信息。
 10. Grid与List模式均支持按多种条件进行排序。
 11. Grid与List模式均支持测试操作的完整控制，包括: 启动/停止（清空）、 暂停/恢复。
-12. Grid 模式中，每张卡片显示：
+12.Grid 模式中，每张卡片显示：
 	- 目标IP地址
 	- 成功/失败统计
 	- 当前测试状态
