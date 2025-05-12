@@ -17,7 +17,10 @@ Whether you’re a network engineer, IT administrator, or tech enthusiast, Multi
 # Features
 
 ### Input & Configuration
-- Input multiple test targets (IPv4, IPv6, or domain names) via a simple text interface
+- Input multiple test targets via a simple text interface：
+  - IPv4
+  - IPv6
+  - domain names
 - Supports mixed input: you can enter a combination of IP addresses and domain names
 - Configure:
   - Ping timeout (ms)
