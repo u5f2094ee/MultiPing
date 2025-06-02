@@ -1,17 +1,22 @@
+
+## 2025.06.02 Version 1.3(20250602)
+1. Added support for the note feature — users can now add labels for each probe target, which will be displayed in the results window.
+2. Fixed a critical bug: When a test target included an IPv6 address, the overall ping process could become stuck with the status remaining “pinging” and no further ping actions being executed.
+3. Improved ping test performance and efficiency.
+
+Known Unfixed Bug: Quitting the program using the red close button causes an exception. This issue has not been resolved in the current version.
+- Temporary Solution: Use Command+Q or the “Quit” option in the menu to exit the program, which will not  trigger the bug.
+
+
+
+-----
+
 ## 2025.05.13 Version 1.2(20250513)
 1. Added support for IPv6 testing functionality.
 2. Added support for domain name testing functionality.
 3. The test target input interface now supports mixed input of IPv4, IPv6, and domain names as test targets.
 4. Bug fix: Resolved an issue where quickly clicking the "Pause" and "Resume" buttons caused the ping test to incorrectly enter the "Complete" state and become unresponsive.
 5. Optimized testing logic and process.
-
-
-Chinese:
-1. 新增支持IPv6测试功能。
-2. 新增支持域名测试功能。
-3. 测试目标输入界面现支持用户混合输入IPv4、IPv6和Domain name作为测试目标。
-4. 修复BUG：解决了快速点击“暂停”和“恢复”按钮时，ping测试状态错误地进入“Complete”并无法继续的问题。
-5. 优化测试逻辑和流程。
 
 
 -----
@@ -34,30 +39,9 @@ Chinese:
 	- Current test status
 
 
-Chinese:
-1. 应用程序更名为 “MultiPing for macOS”。
-2. 限制并发Ping任务数量，并引入随机间隔扰动，解决在批量Ping测试中部分IP返回假失败结果的问题。
-3. 优化用户界面布局与元素设计，提升整体可用性与视觉体验。
-4. 新增自动记忆用户已输入IP地址清单的功能。
-5. 引入智能建议机制，根据目标IP数量动态推荐合适的Ping间隔时间。
-6. 新增Grid模式结果展示窗口，原有的List模式继续保留。
-7. Grid与List模式均支持自适应窗口大小，界面信息动态调整。
-8. Grid与List模式均支持界面内容缩放（放大/缩小）。
-9. Grid与List模式均状态栏实时显示整体成功/失败统计信息。
-10. Grid与List模式均支持按多种条件进行排序。
-11. Grid与List模式均支持测试操作的完整控制，包括: 启动/停止（清空）、 暂停/恢复。
-12.Grid 模式中，每张卡片显示：
-	- 目标IP地址
-	- 成功/失败统计
-	- 当前测试状态
-
-
 -----
 
 
 ## 2025.05.01 Version 1.0(20250501)
 1. The initial version of Multping was launched.
 
-
-Chinese:
-1. MultiPing 初始版本正式发布。
