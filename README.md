@@ -1,7 +1,8 @@
 
 # Screenshot
 
-![Screenshot of MultiPing v1 2](https://github.com/user-attachments/assets/ee8b7712-e132-4cd5-8c63-15279e91ad0e)
+![Screenshot of MultiPing v1 3](https://github.com/user-attachments/assets/241bcca0-6f8a-4cc8-a0b7-ce6810d26edd)
+
 
 
 ---
@@ -22,6 +23,7 @@ Whether you’re a network engineer, IT administrator, or tech enthusiast, Multi
   - IPv6
   - domain names
 - Supports mixed input: you can enter a combination of IP addresses and domain names
+- Supports note labels for each target
 - Configure:
   - Ping timeout (ms)
   - Ping interval (s)
