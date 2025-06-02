@@ -1,7 +1,7 @@
 
 ## 2025.06.02 Version 1.3(20250602)
 1. Added support for the note feature — users can now add labels for each probe target, which will be displayed in the results window.
-2. Fixed a critical bug: When a test target included an IPv6 address, the overall ping process could become stuck with the status remaining “pinging” and no further ping actions being executed.
+2. Fixed a critical bug: When the test targets included an IPv6 address, the overall ping process could become stuck with the status remaining “pinging” and no further ping actions being executed.
 3. Improved ping test performance and efficiency.
 
 Known Unfixed Bug: Quitting the program using the red close button causes an exception. This issue has not been resolved in the current version.
