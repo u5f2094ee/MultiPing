@@ -143,35 +143,67 @@ struct GridPingResultsView: View {
         }
     }
 
-    // MARK: - Nested GridCellView (Unchanged)
+    // MARK: - Nested GridCellView (UPDATED for notes)
     internal struct GridCellView: View {
-        @ObservedObject var result: PingResult; let scale: CGFloat
-        private let baseTargetFontSizeIPv4: CGFloat = 13; private let baseTargetFontSizeOther: CGFloat = 11
-        private let baseTimeFontSize: CGFloat = 10; private let baseCountFontSize: CGFloat = 12
-        private var minCellHeight: CGFloat { 75 * scale }
-        internal init(result: PingResult, scale: CGFloat) { self.result = result; self.scale = scale }
+        @ObservedObject var result: PingResult
+        let scale: CGFloat
+        private let baseTargetFontSizeIPv4: CGFloat = 13
+        private let baseTargetFontSizeOther: CGFloat = 11
+        private let baseNoteFontSize: CGFloat = 10 // New
+        private let baseTimeFontSize: CGFloat = 10
+        private let baseCountFontSize: CGFloat = 12
+        private var minCellHeight: CGFloat { (result.note == nil ? 75 : 90) * scale } // Adjusted for note
+
+        internal init(result: PingResult, scale: CGFloat) {
+            self.result = result
+            self.scale = scale
+        }
+
         private var backgroundColor: Color {
             switch result.responseTime.lowercased() {
             case "pending", "pinging...", "paused", "stopped", "cleared", "cancelled": return Color.gray.opacity(0.3)
             default: return result.isSuccessful ? Color.green.opacity(0.3) : Color.red.opacity(0.3)
             }
         }
-        private var successColor: Color = .green; private var failureColor: Color = .red
+        private var successColor: Color = .green
+        private var failureColor: Color = .red
+
         private var targetDisplayNameFontSize: CGFloat {
             switch result.targetType {
             case .ipv4: return baseTargetFontSizeIPv4 * scale
             case .ipv6, .domain, .unknown: return baseTargetFontSizeOther * scale
             }
         }
+
         internal var body: some View {
             VStack(alignment: .leading, spacing: 4 * scale) {
-                Text(result.displayName).font(.system(size: targetDisplayNameFontSize, weight: .medium, design: .monospaced)).lineLimit(nil).fixedSize(horizontal: false, vertical: true).frame(maxWidth: .infinity, alignment: .leading).padding(.bottom, 2 * scale)
-                Text(result.responseTime).font(.system(size: baseTimeFontSize * scale, design: .monospaced)).foregroundColor(result.isSuccessful ? .primary.opacity(0.8) : .secondary).lineLimit(1).truncationMode(.tail).frame(maxWidth: .infinity, alignment: .leading)
+                Text(result.displayName)
+                    .font(.system(size: targetDisplayNameFontSize, weight: .medium, design: .monospaced))
+                    .lineLimit(nil).fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, (result.note != nil ? 0 : 2) * scale) // Adjust padding if note exists
+
+                if let note = result.note, !note.isEmpty { // Display note if present [cite: 5]
+                    Text(note)
+                        .font(.system(size: baseNoteFontSize * scale, design: .monospaced))
+                        .foregroundColor(.secondary)
+                        .lineLimit(nil).fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 2 * scale)
+                }
+
+                Text(result.responseTime)
+                    .font(.system(size: baseTimeFontSize * scale, design: .monospaced))
+                    .foregroundColor(result.isSuccessful ? .primary.opacity(0.8) : .secondary)
+                    .lineLimit(1).truncationMode(.tail)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 HStack {
-                    HStack(spacing: 2 * scale) { Image(systemName: "checkmark.circle").foregroundColor(successColor); Text("\(result.successCount)").fontWeight(.bold).foregroundColor(successColor) }.font(.system(size: baseCountFontSize * scale))
+                    HStack(spacing: 2 * scale) { Image(systemName: "checkmark.circle").foregroundColor(successColor); Text("\(result.successCount)").fontWeight(.bold).foregroundColor(successColor) }
+                        .font(.system(size: baseCountFontSize * scale))
                     Spacer()
-                    HStack(spacing: 2 * scale) { Image(systemName: "xmark.circle").foregroundColor(failureColor); Text("\(result.failureCount)").fontWeight(.bold).foregroundColor(failureColor) }.font(.system(size: baseCountFontSize * scale))
+                    HStack(spacing: 2 * scale) { Image(systemName: "xmark.circle").foregroundColor(failureColor); Text("\(result.failureCount)").fontWeight(.bold).foregroundColor(failureColor) }
+                        .font(.system(size: baseCountFontSize * scale))
                 }
             }
             .padding(8 * scale).background(backgroundColor).cornerRadius(6 * scale)
@@ -198,4 +230,3 @@ extension GridPingResultsView {
         for i in 0..<4 { if p1[i] != p2[i] { return p1[i] < p2[i] } }; return false
     }
 }
-

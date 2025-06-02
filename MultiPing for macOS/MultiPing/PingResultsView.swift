@@ -16,16 +16,18 @@ struct PingResultsView: View {
     private let maxScale: CGFloat = 1.5
     private let scaleStep: CGFloat = 0.1
 
-    // MARK: - Sorting Enum (Unchanged)
+    // MARK: - Sorting Enum (UPDATED to include Note, but not sortable by note yet)
     enum SortColumn: String, CaseIterable, Equatable {
         case targetValue = "Target"
+        // Note column is for display only as per requirements, not for sorting.
+        // If sorting by note is needed later, it can be added here.
         case time = "Time"
         case success = "Success"
         case failures = "Failures"
         case failRate = "Fail Rate"
     }
 
-    // MARK: - Computed Sorted Results (Unchanged)
+    // MARK: - Computed Sorted Results (Unchanged, notes don't affect sorting logic here)
     var sortedResults: [PingResult] {
         guard let sortColumn = sortColumn else { return manager.results }
         let resultsToSort = manager.results
@@ -50,7 +52,7 @@ struct PingResultsView: View {
     // MARK: - Body
     var body: some View {
         VStack(spacing: 0) {
-             HeaderView(
+             HeaderView( // Pass manager to HeaderView if needed for dynamic widths, or adjust widths manually
                  sortColumn: $sortColumn,
                  sortAscending: $sortAscending
              )
@@ -62,7 +64,7 @@ struct PingResultsView: View {
              } else {
                 List {
                     ForEach(sortedResults) { result in
-                        ResultRowView(result: result)
+                        ResultRowView(result: result) // ResultRowView will handle displaying the note
                            .environment(\.listScale, listScale)
                     }
                 }
@@ -128,16 +130,21 @@ struct PingResultsView: View {
         }
     }
 
-     // MARK: - Nested Helper Views (Header, Row - Unchanged)
+     // MARK: - Nested Helper Views (Header, Row - UPDATED for notes) [cite: 5]
 
      struct HeaderView: View {
          @Environment(\.listScale) var scale: CGFloat
          @Binding var sortColumn: SortColumn?
          @Binding var sortAscending: Bool
 
-         private let statusDotWidth: CGFloat = 15; private let timeWidth: CGFloat = 140
-         private let successWidth: CGFloat = 75; private let failuresWidth: CGFloat = 75
-         private let failRateWidth: CGFloat = 85; private let spacing: CGFloat = 8
+         // Adjusted widths for note column
+         private let statusDotWidth: CGFloat = 15
+         private let noteWidthMin: CGFloat = 80 // Minimum width for notes
+         private let timeWidth: CGFloat = 100 // Reduced slightly
+         private let successWidth: CGFloat = 70 // Reduced slightly
+         private let failuresWidth: CGFloat = 70 // Reduced slightly
+         private let failRateWidth: CGFloat = 75 // Reduced slightly
+         private let spacing: CGFloat = 8
          private let baseFontSize: CGFloat = 10
 
          private func setSort(to newColumn: SortColumn) {
@@ -145,6 +152,7 @@ struct PingResultsView: View {
              else { sortColumn = newColumn
                  switch newColumn {
                  case .targetValue: sortAscending = true
+                 // Note: Sorting by note is not implemented as per current requirements
                  case .time, .success, .failures, .failRate: sortAscending = false
                  }
              }
@@ -152,13 +160,23 @@ struct PingResultsView: View {
 
          var body: some View {
              GeometryReader { geometry in
-                 let totalFixedWidth = (statusDotWidth + timeWidth + successWidth + failuresWidth + failRateWidth) * scale
-                 let totalSpacing = spacing * 5 * scale
-                 let targetWidth = max(80 * scale, geometry.size.width - totalFixedWidth - totalSpacing)
+                 let fixedWidthPortion = (statusDotWidth + timeWidth + successWidth + failuresWidth + failRateWidth) * scale
+                 let totalSpacing = spacing * 6 * scale // Increased for one more column
+                 
+                 // Calculate remaining width for Target and Note
+                 let remainingWidth = geometry.size.width - fixedWidthPortion - totalSpacing
+                 let targetWidth = max(80 * scale, remainingWidth * 0.5) // Target gets 50% of remaining (can be adjusted)
+                 let noteWidth = max(noteWidthMin * scale, remainingWidth * 0.5)   // Note gets 50% of remaining (can be adjusted)
+
+
                  HStack(spacing: spacing * scale) {
-                     Text(" ").frame(width: statusDotWidth * scale, alignment: .center)
+                     Text(" ").frame(width: statusDotWidth * scale, alignment: .center) // Status
                      HeaderButton(title: SortColumn.targetValue.rawValue, column: .targetValue, currentSortColumn: sortColumn, currentSortAscending: sortAscending) { setSort(to: .targetValue) }
                          .frame(width: targetWidth, alignment: .leading)
+                     
+                     // Note Column Header (Display only, not sortable by default) [cite: 5]
+                     Text("Note").frame(width: noteWidth, alignment: .leading)
+
                      HeaderButton(title: SortColumn.time.rawValue, column: .time, currentSortColumn: sortColumn, currentSortAscending: sortAscending) { setSort(to: .time) }
                          .frame(width: timeWidth * scale, alignment: .center)
                      HeaderButton(title: SortColumn.success.rawValue, column: .success, currentSortColumn: sortColumn, currentSortAscending: sortAscending) { setSort(to: .success) }
@@ -176,7 +194,7 @@ struct PingResultsView: View {
          }
      }
 
-    struct HeaderButton: View {
+    struct HeaderButton: View { // Unchanged from original
         @Environment(\.listScale) var scale: CGFloat
         let title: String; let column: SortColumn
         let currentSortColumn: SortColumn?; let currentSortAscending: Bool
@@ -191,13 +209,20 @@ struct PingResultsView: View {
         }
     }
 
-    struct ResultRowView: View {
+    struct ResultRowView: View { // UPDATED for notes [cite: 5]
         @Environment(\.listScale) var scale: CGFloat
         @ObservedObject var result: PingResult
-        private let statusDotWidth: CGFloat = 15; private let timeWidth: CGFloat = 140
-        private let successWidth: CGFloat = 75; private let failuresWidth: CGFloat = 75
-        private let failRateWidth: CGFloat = 85; private let spacing: CGFloat = 8
+        
+        // Adjusted widths for note column
+        private let statusDotWidth: CGFloat = 15
+        private let noteWidthMin: CGFloat = 80
+        private let timeWidth: CGFloat = 100
+        private let successWidth: CGFloat = 70
+        private let failuresWidth: CGFloat = 70
+        private let failRateWidth: CGFloat = 75
+        private let spacing: CGFloat = 8
         private let baseFontSize: CGFloat = 12
+
         private var statusColor: Color {
             switch result.responseTime.lowercased() {
             case "pending", "pinging...", "paused", "stopped", "cleared", "cancelled": return .orange
@@ -206,12 +231,19 @@ struct PingResultsView: View {
         }
         var body: some View {
             GeometryReader { geometry in
-                 let totalFixedWidth = (statusDotWidth + timeWidth + successWidth + failuresWidth + failRateWidth) * scale
-                 let totalSpacing = spacing * 5 * scale
-                 let targetWidth = max(80 * scale, geometry.size.width - totalFixedWidth - totalSpacing)
+                 let fixedWidthPortion = (statusDotWidth + timeWidth + successWidth + failuresWidth + failRateWidth) * scale
+                 let totalSpacing = spacing * 6 * scale
+                 let remainingWidth = geometry.size.width - fixedWidthPortion - totalSpacing
+                 let targetWidth = max(80 * scale, remainingWidth * 0.5)
+                 let noteWidth = max(noteWidthMin * scale, remainingWidth * 0.5)
+
                 HStack(spacing: spacing * scale) {
                     Circle().fill(statusColor).frame(width: 10 * scale, height: 10 * scale).frame(width: statusDotWidth * scale, alignment: .center)
                     Text(result.displayName).frame(width: targetWidth, alignment: .leading).lineLimit(1).truncationMode(.tail).foregroundColor(result.isSuccessful ? .green : (statusColor == .red ? .red : .primary))
+                    
+                    // Display Note [cite: 5]
+                    Text(result.note ?? "").frame(width: noteWidth, alignment: .leading).lineLimit(1).truncationMode(.tail).foregroundColor(.gray)
+
                     Text(result.responseTime).frame(width: timeWidth * scale, alignment: .center).foregroundColor(result.isSuccessful ? .primary : .secondary).lineLimit(1)
                     Text("\(result.successCount)").fontWeight(.bold).frame(width: successWidth * scale, alignment: .center).foregroundColor(result.isSuccessful ? .green : .primary)
                     Text("\(result.failureCount)").fontWeight(.bold).frame(width: failuresWidth * scale, alignment: .center).foregroundColor(result.failureCount > 0 ? .red : .primary)
@@ -262,4 +294,3 @@ extension EnvironmentValues {
         set { self[ListScaleKey.self] = newValue }
     }
 }
-

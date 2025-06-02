@@ -14,6 +14,7 @@ class PingResult: ObservableObject, Identifiable, Equatable { // Added Equatable
     let id = UUID() // Stays the same for Identifiable & Equatable
     let targetValue: String  // Renamed from 'ip' to be more generic
     let targetType: TargetType // New property to store the type
+    let note: String? // New property for notes [cite: 1]
 
     // Properties that change are marked @Published
     @Published var responseTime: String
@@ -22,10 +23,11 @@ class PingResult: ObservableObject, Identifiable, Equatable { // Added Equatable
     @Published var failureRate: Double
     @Published var isSuccessful: Bool
 
-    // Initializer for the class
-    init(targetValue: String, targetType: TargetType, responseTime: String, successCount: Int, failureCount: Int, failureRate: Double, isSuccessful: Bool) {
+    // Initializer for the class (UPDATED for note)
+    init(targetValue: String, targetType: TargetType, note: String?, responseTime: String, successCount: Int, failureCount: Int, failureRate: Double, isSuccessful: Bool) {
         self.targetValue = targetValue
-        self.targetType = targetType // Initialize the new property
+        self.targetType = targetType
+        self.note = note // Initialize the new note property
         self.responseTime = responseTime
         self.successCount = successCount
         self.failureCount = failureCount
@@ -54,4 +56,3 @@ class PingResult: ObservableObject, Identifiable, Equatable { // Added Equatable
         return targetValue
     }
 }
-
